@@ -15,6 +15,13 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedBigInteger('user_id');
+            //        $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+/*            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');*/
             $table->text('title');
             $table->boolean('completed')->default(false);
             $table->timestamps();
